@@ -1,4 +1,4 @@
-{
+module.export = {
   "env": {
     "browser": true,
     "node": true,

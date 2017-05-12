@@ -1,0 +1,10 @@
+.box {
+  max-height: 600px;
+  overflow: auto;
+}
+
+
+.rowClass {
+  text-align: center;
+}
+

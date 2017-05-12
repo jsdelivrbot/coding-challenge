@@ -1,23 +1,25 @@
-import { merge } from 'lodash';
-import { compose, map } from 'lodash/fp';
-import { commerce } from 'faker';
+import { merge } from "lodash"
+import { compose, map } from "lodash/fp"
+import { commerce } from "faker"
 
 const defaultConfig = {
   count: 200,
   end: new Date(),
-  start: new Date(1991, 5, 29),
-};
+  start: new Date(1991, 5, 29)
+}
 
 export function dateBetween(start, end) {
   return () =>
-    new Date(start.getTime() + (Math.random() * (end.getTime() - start.getTime())));
+    new Date(
+      start.getTime() + Math.random() * (end.getTime() - start.getTime())
+    )
 }
 
 export function generateItem(timestamp) {
   return {
     timestamp,
-    description: commerce.productName(),
-  };
+    description: commerce.productName()
+  }
 }
 
 /**
@@ -29,12 +31,12 @@ export function generateItem(timestamp) {
  * @param {Date} [config.end=200] The latest possible returned date
  * @returns {[Object]} Containing a `timestamp` {Date} and `description` {String} prop
  */
-export default function (config = {}) {
-  const { count, end, start } = merge({}, defaultConfig, config);
+export default function(config = {}) {
+  const { count, end, start } = merge({}, defaultConfig, config)
 
-  const genDate = dateBetween(start, end);
-  const genDates = map(genDate);
-  const genItems = map(generateItem);
+  const genDate = dateBetween(start, end)
+  const genDates = map(genDate)
+  const genItems = map(generateItem)
 
-  return compose(genItems, genDates)(Array(count));
+  return compose(genItems, genDates)(Array(count))
 }
